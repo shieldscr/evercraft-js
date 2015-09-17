@@ -14,7 +14,8 @@ function Character() {
     setArmorClass : setArmorClass,
     getHp : getHp,
     setHp : setHp,
-    attack : attack };
+    attack : attack,
+    isDead : isDead };
 
   function getName() {
     return this.name;
@@ -50,8 +51,21 @@ function Character() {
     this.hp = hp;
   }
 
+  function isDead() {
+    if (this.hp <= 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   function attack(roll, opponent) {
-    if (roll > opponent.getArmorClass()) {
+    if (roll >= opponent.getArmorClass()) {
+      if (roll === 20) {
+        opponent.setHp(opponent.getHp()-2);
+      } else {
+        opponent.setHp(opponent.getHp()-1);
+      }
       return true;
     } else {
       return false;

@@ -70,24 +70,73 @@ describe('Character', function() {
 
   when('combat is started', function() {
     var character;
+    var characterTwo;
 
     beforeEach(function() {
       character = Character();
+      characterTwo = Character();
     });
 
     it('can successfully attack another character with a lower armor class', function() {
-      var characterTwo = Character();
       characterTwo.setArmorClass(1);
 
       expect(character.attack(2, characterTwo)).toBe(true);
     });
 
     it('cannot successfully attack another character with a higher armor class', function() {
-      var characterTwo = Character();
       characterTwo.setArmorClass(50);
 
       expect(character.attack(2, characterTwo)).toBe(false);
     });
+
+    it('can successfully attack another character with the same armor class', function () {
+      characterTwo.setArmorClass(10);
+
+      expect(character.attack(10, characterTwo)).toBe(true);
+    });
+
+    it('can cause damage against another character when attack is successful', function() {
+      characterTwo.setArmorClass(10);
+
+      expect(characterTwo.getHp()).toBe(5);
+      character.attack(10, characterTwo);
+      expect(characterTwo.getHp()).toBe(4);
+    });
+
+    it('cannot cause damage agains another character when attack is unsuccessful', function() {
+      characterTwo.setArmorClass(10);
+
+      expect(characterTwo.getHp()).toBe(5);
+      character.attack(9, characterTwo);
+      expect(characterTwo.getHp()).toBe(5);
+    });
+
+    it('can deal a critical hit with a natural 20 roll', function() {
+      characterTwo.setArmorClass(10);
+
+      expect(characterTwo.getHp()).toBe(5);
+      character.attack(20, characterTwo);
+      expect(characterTwo.getHp()).toBe(3);
+    });
+
+    it('can be dead when hp reaches 0', function() {
+      characterTwo.setArmorClass(10);
+      characterTwo.setHp(2);
+
+      character.attack(20, characterTwo);
+      expect(characterTwo.getHp()).toBe(0);
+      expect(characterTwo.isDead()).toBe(true);
+    });
+
+    it('is not dead when hp is above 0', function() {
+      characterTwo.setArmorClass(10);
+      characterTwo.setHp(5);
+
+      character.attack(20, characterTwo);
+      expect(characterTwo.getHp()).toBe(3);
+      expect(characterTwo.isDead()).toBe(false);
+    });
+
   });
 
 });
