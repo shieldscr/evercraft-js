@@ -26,7 +26,8 @@ function Character() {
     getCharisma : getCharisma,
     setCharisma : setCharisma,
     attack : attack,
-    isDead : isDead };
+    isDead : isDead,
+    getModifierForAbilityScore : getModifierForAbilityScore };
 
   function setAlignment(alignment) {
     if (this.validAlignments.indexOf(alignment) > -1) {
@@ -101,6 +102,13 @@ function Character() {
     } else {
       return false;
     }
+  }
+
+  function getModifierForAbilityScore(abilityScore) {
+    if (abilityScore === 20) {
+      return 5;
+    }
+    return -5;
   }
 
   return character;

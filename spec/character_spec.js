@@ -90,6 +90,11 @@ describe('Character', function() {
     it('has charisma', function() {
       expect(character.getCharisma()).toBe(10);
     });
+
+    it('has a modifier for given ability score', function() {
+      expect(character.getModifierForAbilityScore(1)).toBe(-5);
+      expect(character.getModifierForAbilityScore(20)).toBe(5);
+    });
   });
 
   when('combat is started', function() {
