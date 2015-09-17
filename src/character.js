@@ -5,29 +5,28 @@ function Character() {
     validAlignments : ['Good', 'Evil', 'Neutral'],
     armorClass : 10,
     hp : 5,
+    strength : 10,
+    dexterity : 10,
+    constitution : 10,
+    wisdom : 10,
+    intelligence : 10,
+    charisma : 10,
 
-    getName : getName,
-    setName : setName,
-    getAlignment : getAlignment,
     setAlignment : setAlignment,
-    getArmorClass : getArmorClass,
-    setArmorClass : setArmorClass,
-    getHp : getHp,
-    setHp : setHp,
+    getStrength : getStrength,
+    setStrength : setStrength,
+    getDexterity : getDexterity,
+    setDexterity : setDexterity,
+    getConstitution : getConstitution,
+    setConstitution : setConstitution,
+    getWisdom : getWisdom,
+    setWisdom : setWisdom,
+    getIntelligence : getIntelligence,
+    setIntelligence : setIntelligence,
+    getCharisma : getCharisma,
+    setCharisma : setCharisma,
     attack : attack,
     isDead : isDead };
-
-  function getName() {
-    return this.name;
-  }
-
-  function setName(name) {
-    this.name = name;
-  }
-
-  function getAlignment() {
-    return this.alignment;
-  }
 
   function setAlignment(alignment) {
     if (this.validAlignments.indexOf(alignment) > -1) {
@@ -35,20 +34,52 @@ function Character() {
     }
   }
 
-  function getArmorClass() {
-    return this.armorClass;
+  function getStrength() {
+    return this.strength;
   }
 
-  function setArmorClass(armorClass) {
-    this.armorClass = armorClass;
+  function setStrength(strength) {
+    this.strength = strength;
   }
 
-  function getHp() {
-    return this.hp;
+  function getDexterity() {
+    return this.dexterity;
   }
 
-  function setHp(hp) {
-    this.hp = hp;
+  function setDexterity(dexterity) {
+    this.dexterity = dexterity;
+  }
+
+  function getConstitution() {
+    return this.constitution;
+  }
+
+  function setConstitution(constitution) {
+    this.constitution = constitution;
+  }
+
+  function getIntelligence() {
+    return this.constitution;
+  }
+
+  function setIntelligence(intelligence) {
+    this.intelligence = intelligence;
+  }
+
+  function getCharisma() {
+    return this.charisma;
+  }
+
+  function setCharisma(charisma) {
+    this.charisma = charisma;
+  }
+
+  function getWisdom() {
+    return this.wisdom;
+  }
+
+  function setWisdom(wisdom) {
+    this.wisdom = wisdom;
   }
 
   function isDead() {
@@ -60,11 +91,11 @@ function Character() {
   }
 
   function attack(roll, opponent) {
-    if (roll >= opponent.getArmorClass()) {
+    if (roll >= opponent.armorClass) {
       if (roll === 20) {
-        opponent.setHp(opponent.getHp()-2);
+        opponent.hp = (opponent.hp-2);
       } else {
-        opponent.setHp(opponent.getHp()-1);
+        opponent.hp = (opponent.hp-1);
       }
       return true;
     } else {
